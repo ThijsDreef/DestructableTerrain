@@ -16,7 +16,6 @@ public class CollisionChecker extends GameObject
   public CollisionChecker(ArrayList<GameObject> destructableObjects, boolean[] walls, int levelHeight, int levelWidth)
   {
     this.destructableObjects = destructableObjects;
-    System.out.println(destructableObjects.size() + " help");
     this.walls = walls;
     this.levelHeight = levelHeight;
     this.levelWidth = levelWidth;
@@ -71,8 +70,10 @@ public class CollisionChecker extends GameObject
         {
           if (outOfBounds(((int)destructableObjects.get(i).getX() + x), (int)destructableObjects.get(i).getY() + y))
           {
-            if (destruct)
+            if (destructableObjects.get(i).destruct)
+            {
               destructableObjects.get(i).setDead(true);
+            }
             else
               resolve(destructableObjects.get(i));
             continue;

@@ -2,20 +2,21 @@ package game.States;
 
 import engine.Engine;
 import engine.Renderer;
+import game.GameObjects.PerlinNoiseDisplay;
 import game.Util.LevelGenerator;
+import game.managers.GameObject;
 import game.managers.ObjectManager;
 import game.managers.State;
 
 public class Play extends State
 {
-  public Play(float[] values, int width, int height, int levelHeight, int levelWidth)
+  public Play(int width, int height, int levelHeight, int levelWidth, GameObject player)
   {
+    PerlinNoiseDisplay dis = new PerlinNoiseDisplay(width, height, (int)(Math.random() * 1024));
+    dis.setColor();
     manager = new ObjectManager();
-//    manager.addObject(new PerlinNoiseDisplay(720, 720));
     LevelGenerator temp = new LevelGenerator();
-    manager = temp.createLevel(values, width, height, levelHeight, levelWidth);
-//    manager.addObject(new Player(0, 0));
-//    manager.addObject(new CollisionChecker(manager.findObject("player"), manager.getObjects("wall")));
+    manager = temp.createLevel(dis.color, width, height, levelHeight, levelWidth, player);
   }
   @Override
   public void update(Engine en, float dt)

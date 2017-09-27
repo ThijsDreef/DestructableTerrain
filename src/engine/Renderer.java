@@ -89,7 +89,7 @@ public class Renderer {
     }
   }
 
-  public void drawLargeString(String text, int color, int offx, int offy, ShadowType shadowType) {
+  public int drawLargeString(String text, int color, int offx, int offy, ShadowType shadowType) {
     text = text.toUpperCase();
     int offset = 0;
     for (int i = 0; i < text.length(); i++) {
@@ -102,6 +102,7 @@ public class Renderer {
       }
       offset += largeFont.widths[unicode];
     }
+    return offset;
   }
 
   public void drawImage(Image image, int offx, int offy)
@@ -180,6 +181,19 @@ public class Renderer {
       {
         setPixels(x + offx, y + offy, color, shadow);
       }
+    }
+  }
+  public void drawNonFilledRect(int offx, int offy, int width, int height, int color, ShadowType shadow)
+  {
+    for (int x = 0; x < width + 1; x++)
+    {
+      setPixels(x + offx, offy, color, shadow);
+      setPixels(x + offx, offy + height, color, shadow);
+    }
+    for (int y = 0; y < height; y++)
+    {
+      setPixels(offx, offy + y, color, shadow);
+      setPixels(offx + width, offy + y, color, shadow);
     }
   }
 

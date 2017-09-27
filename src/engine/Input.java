@@ -2,7 +2,7 @@ package engine;
 
 import java.awt.event.*;
 
-public class Input implements KeyListener, MouseListener, MouseMotionListener {
+public class Input implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
   private Engine en;
 
   private boolean[] keys = new boolean[255];
@@ -13,7 +13,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
   private boolean[] buttons = new boolean[5];
   private boolean[] buttonsLast = new boolean[5];
 
-  private int mouseX, mouseY;
+  private int mouseX, mouseY, mouseWheelScroll = 0;
 
   public Input(Engine en)
   {
@@ -21,30 +21,38 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
     en.getWindow().getCanvas().addKeyListener(this);
     en.getWindow().getCanvas().addMouseListener(this);
     en.getWindow().getCanvas().addMouseMotionListener(this);
+    en.getWindow().getCanvas().addMouseWheelListener(this);
   }
   public void update()
   {
     keysLast = keys.clone();
     keyUp = reset.clone();
     buttonsLast = buttonsLast.clone();
+    mouseWheelScroll = 0;
   }
   @Override
   public void keyTyped(KeyEvent e) {
-
+    keys[e.getKeyCode()] = true;
   }
   public void keyPressed(KeyEvent e) {
     keys[e.getKeyCode()] = true ;
   }
 
   @Override
-  public void keyReleased(KeyEvent e) {
+  public void keyReleased(KeyEvent e)
+  {
     keys[e.getKeyCode()] = false;
     keyUp[e.getKeyCode()] = true;
   }
 
   @Override
   public void mouseClicked(MouseEvent e) {
+  }
 
+  @Override
+  public void mouseWheelMoved(MouseWheelEvent e)
+  {
+    mouseWheelScroll = (int)e.getPreciseWheelRotation();
   }
 
   @Override
@@ -68,7 +76,10 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
   }
 
   @Override
-  public void mouseDragged(MouseEvent e) {
+  public void mouseDragged(MouseEvent e)
+  {
+    mouseX = (int)(e.getX() / en.getScale());
+    mouseY = (int)(e.getY() / en.getScale());
 
   }
 
@@ -78,6 +89,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
     mouseX = (int)(e.getX() / en.getScale());
     mouseY = (int)(e.getY() / en.getScale());
   }
+  public boolean mouseButtonPressed(int keyCode) {return buttons[keyCode];}
   public boolean isKeyPressed(int keyCode)
   {
     return keys[keyCode];
@@ -93,5 +105,10 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
   public int getMouseY()
   {
     return mouseY;
+  }
+
+  public int getMouseWheelScroll()
+  {
+    return mouseWheelScroll;
   }
 }

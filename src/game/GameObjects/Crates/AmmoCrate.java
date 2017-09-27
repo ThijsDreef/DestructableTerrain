@@ -15,7 +15,6 @@ public class AmmoCrate extends GameObject
     setState(ammo);
     this.w = 32;
     this.h = 32;
-    System.out.println(ammo);
     addComponent(new Collider("ammoCrate", this));
   }
   @Override

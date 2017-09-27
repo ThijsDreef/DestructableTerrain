@@ -3,13 +3,13 @@ package game;
 import engine.AbstractGame;
 import engine.Engine;
 import engine.Renderer;
-import game.States.StartState;
+import game.States.Menu;
 
 public class Game extends AbstractGame
 {
   public Game()
   {
-    push(new StartState());
+    push(new Menu());
   }
 
   @Override
@@ -29,6 +29,7 @@ public class Game extends AbstractGame
     Engine en = new Engine((new Game()));
     en.setWidth(720);
     en.setHeight(720);
+    en.setDebug(false);
     en.start();
   }
 }

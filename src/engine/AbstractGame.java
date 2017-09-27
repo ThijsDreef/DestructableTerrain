@@ -6,6 +6,7 @@ import java.util.Stack;
 
 public abstract class AbstractGame
 {
+  public int score = 0;
   private State changeState;
   private Stack<State> states = new Stack<State>();
   public abstract void update(Engine En, float dt);

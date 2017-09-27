@@ -1,25 +1,20 @@
 package game.managers;
 
 import engine.Engine;
-import engine.Fx.ShadowType;
 import engine.Renderer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static engine.Fx.ShadowType.NONE;
-
 public abstract class GameObject implements Serializable
 {
-  public ShadowType shadowType = NONE;
   protected float x,y,h,w;
   public boolean destruct = false;
   protected String tag = "null";
   private boolean dead = false;
-  public boolean physicsMove = false;
   protected ArrayList<Component> components = new ArrayList<Component>();
   private int state;
-  public int xVel, yVel;
+  public float xVel, yVel;
   public abstract void update(Engine en, float dt);
   public abstract void render(Engine en, Renderer r);
 

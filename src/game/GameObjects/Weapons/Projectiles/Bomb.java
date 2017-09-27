@@ -8,6 +8,7 @@ import game.managers.GameObject;
 public class Bomb extends GameObject
 {
   int strength, diffuseTimer, explosions;
+
   public Bomb(int x, int y, int w, int h, int strength, int diffuseTimer, int explosions)
   {
     this.x = x - w / 2;
@@ -18,6 +19,7 @@ public class Bomb extends GameObject
     this.diffuseTimer = diffuseTimer;
     this.explosions = (explosions <= 0) ? 1 : explosions;
   }
+
   @Override
   public void update(Engine en, float dt)
   {
@@ -30,7 +32,7 @@ public class Bomb extends GameObject
   @Override
   public void render(Engine en, Renderer r)
   {
-    r.drawRect((int)x, (int)y, (int)w, (int)h, 0xff800080, ShadowType.FADE);
+    r.drawRect((int) x, (int) y, (int) w, (int) h, 0xff800080, ShadowType.FADE);
   }
 
   @Override
@@ -44,13 +46,15 @@ public class Bomb extends GameObject
   {
 
   }
+
   private void explode(Engine en)
   {
     for (int i = 0; i < strength * 5000; i++)
-      en.getGame().peek().getManager().addObject(new ParticleBullet((int)x, (int)y, ((float)Math.random() * 2 -1) * 3, ((float)Math.random() * 2 - 1) * 3));
+      en.getGame().peek().getManager().addObject(new ParticleBullet((int) x, (int) y, ((float) Math.random() * 2 - 1) * 3, ((float) Math.random() * 2 - 1) * 3));
     explosions--;
     if (explosions <= 0)
       setDead(true);
     diffuseTimer = 5;
   }
 }
+

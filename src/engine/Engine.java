@@ -1,6 +1,5 @@
 package engine;
 
-import engine.Fx.ShadowType;
 import engine.physics.Physics;
 
 import java.awt.event.KeyEvent;
@@ -96,7 +95,7 @@ public class Engine implements Runnable
           renderer.FlushMaps();
         }
         if (debug)
-          renderer.drawLargeString("fps: " + displayFrames, 0xff000000, camera.getTransx(), camera.getTransy(), ShadowType.NONE);
+          renderer.drawString("fps: " + displayFrames, 0xff000000, camera.getTransx(), camera.getTransy());
         window.update();
         renderer.clear();
         camera.update();

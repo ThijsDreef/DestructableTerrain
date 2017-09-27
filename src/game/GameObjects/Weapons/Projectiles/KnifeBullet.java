@@ -9,9 +9,10 @@ import game.managers.GameObject;
 public class KnifeBullet extends GameObject
 {
 
-  public KnifeBullet(int x, int y, int xvel, int yvel)
+  public KnifeBullet(int x, int y)
   {
     tag = "destruct";
+    setState(250);
     destruct = true;
     this.w = 18;
     this.h = 18;
@@ -23,13 +24,13 @@ public class KnifeBullet extends GameObject
   public void update(Engine en, float dt)
   {
     updateComponents(en, dt);
+    setDead(true);
   }
 
   @Override
   public void render(Engine en, Renderer r)
   {
     r.drawRect((int)x, (int)y, (int)w, (int)h, 0xff00ff00, ShadowType.FADE);
-    setDead(true);
   }
 
   @Override

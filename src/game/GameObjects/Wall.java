@@ -33,7 +33,7 @@ public class Wall extends GameObject
   @Override
   public void render(Engine en, Renderer r)
   {
-    r.drawRect((int)x, (int)y, width, height, 0xff00ff00, ShadowType.FADE);
+    r.drawRect((int)x, (int)y, width, height, 0xff505050, ShadowType.FADE);
   }
 
   @Override
